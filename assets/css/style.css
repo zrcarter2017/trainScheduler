@@ -3,6 +3,7 @@
 }
 
 .jumbotron {
+	/*background credit to google images*/
 	background-image:url(polarexpress.jpg);
 	background-size:cover;
 	background-position:10%;
@@ -19,3 +20,4 @@ body{
 	background-color:#1c1a23;
 	color:white;
 }
+
