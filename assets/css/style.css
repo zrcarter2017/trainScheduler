@@ -1,0 +1,16 @@
+.panel-heading {
+	background-color:blue;
+}
+
+.jumbotron {
+	background-image:url(polarexpress.jpg);
+	background-size:cover;
+	background-position:10%;
+	color:white;
+}
+
+.container {
+	background-color:rgba(0,0,0,.5);
+	border-radius:15px;
+	text-align:center;
+}
