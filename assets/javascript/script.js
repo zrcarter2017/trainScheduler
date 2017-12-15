@@ -20,7 +20,9 @@ $("#addTrain").on("click", function(event) {
   // select user inputs
   var trainName = $("#trainName").val().trim();
   var trainDestination = $("#trainDestination").val().trim();
-  var trainTime = moment($("#firstTime").val().trim(), "HH:mm");
+
+  //Tried fixing bug... I think this trainTime is not being calculated in the correct format
+  var trainTime = moment($("#firstTime").val().trim()).format('HH:mm');
   var trainFrequency = $("#frequency").val().trim();
 
   // create train object
@@ -54,20 +56,22 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
 
     //subtract day so difference is not negative
-    var firstTime = moment(trainTime, "HH:mm").subtract(1, "days");
+    var firstTime = moment(trainTime, "HH:mm").subtract(1, "day");
     // Current Time
     var currentTime = moment();
     // Difference between first train to current time
-    var currentDeltaFromStart = moment().diff(moment(firstTime), "minutes");
+    var currentDeltaFromStart = currentTime.diff(moment(firstTime), "minutes");
     // remainder
     var remainder = currentDeltaFromStart % trainFrequency;
+    //calculate minutes until arrival
     var minutesTilArrival = trainFrequency - remainder;
-    // Next Train
+    // add minutes til arrival to the current time
     var nextTrain = moment().add(minutesTilArrival, "minutes");
+    //convert minutes to military time
     var nextTrainTime = moment(nextTrain).format("HH:mm");
 
 
-
+    console.log("trainTime: " + trainTime);
     console.log("minutesTilArrival: " + minutesTilArrival);
     console.log("arrival: " + moment(nextTrain).format("HH:mm"));
     console.log("firstTrain: " + firstTime);
